@@ -1,11 +1,42 @@
 var inquirer = require("inquirer");
 var Word = require("./word.js");
+//var Animals = require("./animals.txt");
+var fs = require("fs");
+
+var animalsArray = [];
+
+function randomWord(){
+    fs.readFile("animals.txt", "utf8", function(error, data) {
+        
+        // If the code experiences any errors it will log the error to the console.
+        if (error) {
+            return console.log(error);
+        }
+        
+        // We will then print the contents of data
+        //console.log(data);
+        
+        // Then split it by commas (to make it more readable)
+        var animalsArray = data.split("\r\n");
+        
+        wordToGuess = new Word( animalsArray[ randomIntFromInterval(0, animalsArray.length) ] );
+       wordToGuess.initLetters();
+        //console.log(wordToGuess.value);
+        // We will then re-display the content as an array for later use.
+        // console.log(animalsArray);
+        wordToGuess.displayWord();
+        getUserGuess();
+    });
+}
+    
 
 var wins = 0;
 var losses = 0;
 
 var wordToGuess = new Word("momomonkeys");
 wordToGuess.initLetters();
+
+randomWord();
 /*
 console.log(wordToGuess.wordComplete());
 wordToGuess.displayWord();
@@ -22,8 +53,8 @@ wordToGuess.displayWord();
 console.log(wordToGuess.wordComplete());
 */
 
-wordToGuess.displayWord();
-getUserGuess();
+//wordToGuess.displayWord();
+//getUserGuess();
 //wordToGuess.displayWord();
 
 function getUserGuess(){
@@ -59,7 +90,7 @@ function getUserGuess(){
                     wins++;
                 }
                 else{    
-                    console.log("You Lose");
+                    console.log("You Lose! It was: " + wordToGuess.value);
                     losses++;
                 }
                 
@@ -82,13 +113,19 @@ function restart(){
         .prompt(question)
         .then(function(answer){
             if(answer.restart === "yes"){
-                wordToGuess = new Word("monkeys");
+                //wordToGuess = new Word("monkeys");
+                randomWord();
                 wordToGuess.initLetters();
                 wordToGuess.displayWord();
                 getUserGuess();     
             }else
                 console.log("GOOD BYE");
         });
+}
+
+function randomIntFromInterval(min,max)
+{
+    return Math.floor(Math.random()*(max-min+1)+min);
 }
 
 /*
