@@ -9,7 +9,7 @@ function Word(value){
         for(var i=0; i<this.value.length; i++){
             this.lettersArray.push( new Letter( this.value[i]) ); //add letter to array
         }
-        console.log(this.lettersArray);
+        //console.log(this.lettersArray);
     };
     this.checkGuess = function(guess){
         var correctGuess = false;
@@ -27,14 +27,14 @@ function Word(value){
     this.displayWord = function(){
         var output = "";
         for(var i=0; i<this.lettersArray.length; i++){
-            output += this.lettersArray[i].output();
+            output += this.lettersArray[i].output() + " ";
         }
         console.log(output);    
     };
     this.wordComplete = function(){
         var complete = true;
         for(var i=0; i<this.lettersArray.length; i++){
-            if(!this.lettersArray.isGuessed)
+            if(!this.lettersArray[i].isGuessed)
                 complete = false;
         }
         return complete;
