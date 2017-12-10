@@ -1,6 +1,9 @@
 var inquirer = require("inquirer");
 var Word = require("./word.js");
 
+var wins = 0;
+var losses = 0;
+
 var wordToGuess = new Word("momomonkeys");
 wordToGuess.initLetters();
 /*
@@ -44,17 +47,48 @@ function getUserGuess(){
                 console.log("Wrong");
 
             wordToGuess.displayWord();
+            console.log("Guesses left: " + wordToGuess.guessesRemaining);
+            console.log("Letters guessed: " + wordToGuess.userGuesses);
 
             if(!wordToGuess.wordComplete() && wordToGuess.guessesRemaining > 0)
                 getUserGuess();
             else{
                 console.log("Game Over");
-                if(wordToGuess.wordComplete())
+                if(wordToGuess.wordComplete()){
                     console.log("You Win");
-                else    
+                    wins++;
+                }
+                else{    
                     console.log("You Lose");
+                    losses++;
+                }
+                
+                console.log(`Wins: ${wins} Losses: ${losses}`);
+                restart();
             }
     });
+}
+
+function restart(){
+
+    var question = {
+        name:"restart",
+        type:"list",
+        message:"Restart?",
+        choices:["yes", "no"]
+    };
+
+    inquirer
+        .prompt(question)
+        .then(function(answer){
+            if(answer.restart === "yes"){
+                wordToGuess = new Word("monkeys");
+                wordToGuess.initLetters();
+                wordToGuess.displayWord();
+                getUserGuess();     
+            }else
+                console.log("GOOD BYE");
+        });
 }
 
 /*

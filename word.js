@@ -5,6 +5,7 @@ function Word(value){
     this.length = this.value.length;
     this.guessesRemaining = 7;
     this.lettersArray = [];
+    this.userGuesses = [];
     this.initLetters = function(){
         for(var i=0; i<this.value.length; i++){
             this.lettersArray.push( new Letter( this.value[i]) ); //add letter to array
@@ -13,6 +14,10 @@ function Word(value){
     };
     this.checkGuess = function(guess){
         var correctGuess = false;
+
+        if(this.alreadyGuessed(guess))
+            return false;
+
         for(var i=0; i<this.lettersArray.length; i++){
             if( this.lettersArray[i].value === guess ){
                 correctGuess = true;
@@ -22,6 +27,8 @@ function Word(value){
 
         if(!correctGuess) this.guessesRemaining--;
         
+        this.userGuesses.push(guess);
+
         return correctGuess;
     };
     this.displayWord = function(){
@@ -38,6 +45,13 @@ function Word(value){
                 complete = false;
         }
         return complete;
+    };
+    this.alreadyGuessed = function(guess){
+        for(var i=0; i < this.userGuesses.length; i++){
+            if(this.userGuesses[i] === guess)
+                return true;
+        }
+        return false;
     };
 }
 
