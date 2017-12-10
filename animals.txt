@@ -50,3 +50,8 @@ tiger
 turtle
 wolf
 zebra
+haggis
+aardvark
+seamonkey
+gerryadams
+markkazanski
