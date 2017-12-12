@@ -36,7 +36,7 @@ function Word(value){
         for(var i=0; i<this.lettersArray.length; i++){
             output += this.lettersArray[i].output() + " ";
         }
-        console.log(output);    
+        console.log("Word: " + output);    
     };
     this.wordComplete = function(){
         var complete = true;

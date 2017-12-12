@@ -20,10 +20,7 @@ function randomWord(){
         var animalsArray = data.split("\r\n");
         
         wordToGuess = new Word( animalsArray[ randomIntFromInterval(0, animalsArray.length) ] );
-       wordToGuess.initLetters();
-        //console.log(wordToGuess.value);
-        // We will then re-display the content as an array for later use.
-        // console.log(animalsArray);
+        wordToGuess.initLetters();
         wordToGuess.displayWord();
         getUserGuess();
     });
@@ -37,25 +34,6 @@ var wordToGuess = new Word("momomonkeys");
 wordToGuess.initLetters();
 
 randomWord();
-/*
-console.log(wordToGuess.wordComplete());
-wordToGuess.displayWord();
-
-wordToGuess.checkGuess("m");
-wordToGuess.checkGuess("o");
-wordToGuess.checkGuess("n");
-wordToGuess.checkGuess("k");
-wordToGuess.checkGuess("e");
-wordToGuess.checkGuess("y");
-wordToGuess.checkGuess("s");
-
-wordToGuess.displayWord();
-console.log(wordToGuess.wordComplete());
-*/
-
-//wordToGuess.displayWord();
-//getUserGuess();
-//wordToGuess.displayWord();
 
 function getUserGuess(){
     var question = {
@@ -113,11 +91,9 @@ function restart(){
         .prompt(question)
         .then(function(answer){
             if(answer.restart === "yes"){
-                //wordToGuess = new Word("monkeys");
                 randomWord();
-                wordToGuess.initLetters();
-                wordToGuess.displayWord();
-                getUserGuess();     
+                //wordToGuess.initLetters();
+                //getUserGuess();     
             }else
                 console.log("GOOD BYE");
         });
