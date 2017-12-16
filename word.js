@@ -2,12 +2,12 @@ var Letter = require("./letter.js");
 
 function Word(value){
     this.value = value;
-    this.length = value.length;
+    this.wordLength = value.length;
     this.guessesRemaining = 7;
     this.lettersArray = [];
     this.userGuesses = [];
     this.initLetters = function(){
-        for(var i=0; i<this.value.length; i++){
+        for(var i=0; i<this.wordLength; i++){
             this.lettersArray.push( new Letter( this.value[i]) ); //add letter to array
         }
         //console.log(this.lettersArray);
