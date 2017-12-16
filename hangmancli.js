@@ -13,13 +13,13 @@ function randomWord(){
             return console.log(error);
         }
         
-        // We will then print the contents of data
-        //console.log(data);
-        
-        // Then split it by commas (to make it more readable)
+        // Then split it by line breaks (to make it more readable)
         var animalsArray = data.split("\r\n");
         
-        wordToGuess = new Word( animalsArray[ randomIntFromInterval(0, animalsArray.length) ] );
+        var newWord = animalsArray[ randomIntFromInterval(0, animalsArray.length) ];
+        //console.log(newWord);
+
+        wordToGuess = new Word( newWord );
         wordToGuess.initLetters();
         wordToGuess.displayWord();
         getUserGuess();
@@ -91,9 +91,7 @@ function restart(){
         .prompt(question)
         .then(function(answer){
             if(answer.restart === "yes"){
-                randomWord();
-                //wordToGuess.initLetters();
-                //getUserGuess();     
+                randomWord();    
             }else
                 console.log("GOOD BYE");
         });
@@ -103,35 +101,3 @@ function randomIntFromInterval(min,max)
 {
     return Math.floor(Math.random()*(max-min+1)+min);
 }
-
-/*
-function start() {
-    inquirer
-      .prompt({
-        name: "postOrBid",
-        type: "rawlist",
-        message: "Would you like to [POST] an auction or [BID] on an auction?",
-        choices: ["POST", "BID"]
-      })
-      .then(function(answer) {
-        // based on their answer, either call the bid or the post functions
-        if (answer.postOrBid.toUpperCase() === "POST") {
-          postAuction();
-        }
-        else {
-          bidAuction();
-        }
-      });
-  }
-  */
-
-/*
-wordToGuess.initLetters();
-wordToGuess.displayWord();
-console.log(wordToGuess.guessesRemaining);
-wordToGuess.checkGuess("m");
-wordToGuess.displayWord();
-wordToGuess.checkGuess("q");
-console.log(wordToGuess.guessesRemaining);
-wordToGuess.displayWord();
-*/

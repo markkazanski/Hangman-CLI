@@ -2,7 +2,7 @@ var Letter = require("./letter.js");
 
 function Word(value){
     this.value = value;
-    this.length = this.value.length;
+    this.length = value.length;
     this.guessesRemaining = 7;
     this.lettersArray = [];
     this.userGuesses = [];
